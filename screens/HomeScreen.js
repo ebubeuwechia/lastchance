@@ -71,19 +71,29 @@ export default function HomeScreen() {
             <View style={{flex: 1,marginHorizontal: 16, marginBottom: 2, flex: 1,flexDirection: 'row', justifyContent: 'space-around',}}>
                <View style={{flex: 1,marginHorizontal: 16, marginBottom: 2, flexDirection: 'row', justifyContent: 'space-around'}}>
                   {/*location*/}
-                  <Text style={{color: 'black', textAlign: 'center', fontSize: 24, top:200,
+                  <Text style={{color: 'black', textAlign: 'center', fontSize: 24, top:175, left:100,
                    fontWeight: 'bold', flex: 1, justifyContent: 'center', alignItems: 'center'}}
                   > Houston,
                      <Text style={{fontSize: 18, fontWeight: '600',color: '#808080', flex: 1,
-                     justifyContent: 'center', alignItems: 'center'}}> Texas
+                     justifyContent: 'center', alignItems: 'center', top:175, left:0}}> Texas
                      </Text>
                   </Text>
                   {/*weather image*/}
                   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flex: 1,}}>
                      <Image source={require('../assets/images/partlycloudy.png')}
-                      style={{ width:"150%", height:"60%", top:200, left:0, right:0}}>
-
+                      style={{ width:"150%", height:"40%", top:140, left:0, right:80}}>
                      </Image>
+                  </View>
+                  <View style ={{ flex: 1, justifyContent: 'space-between', marginVertical: 2,}}>
+                     {/* degree celcius*/}
+                     <Text style = {{flex: 1, justifyContent: 'center', alignItems: 'center', textAlign: 'center', 
+                     fontWeight: 'bold', color: 'black', fontSize: 48, marginLeft: 20, top:500, left:-120, right:60 }}>
+                        23&#176;
+                     </Text>
+                     <Text style = {{flex: 1, justifyContent: 'center', alignItems: 'center', textAlign: 'center', 
+                     fontWeight: 'bold', color: 'black', fontSize: 25, marginLeft: 20, top:359, left:-125, right:60 }}>
+                        Partly Cloudy
+                     </Text>
                   </View>
                </View>
             </View>
