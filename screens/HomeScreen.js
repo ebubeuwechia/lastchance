@@ -1,17 +1,41 @@
 import { View, Text, SafeAreaView, TextInput, TouchableOpacity, ImageBackground, ImageBackgroundComponent, ImageBackgroundBase, ScrollView, } from "react-native";
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { Image } from "react-native";
 import { theme } from "../theme";
 import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
 import {MapPinIcon } from 'react-native-heroicons/solid';
+import {debounce} from 'lodash';
+import { fetchLocations, fetchWeatherForecast } from "../api/weather";
 export default function HomeScreen() {
    const [showSearch, toggleSearch ] = useState(false);
-   const [locations, setLocation]  = useState([1,2,3]); //three results to appear
+   const [locations, setLocation]  = useState(['Houston,Texas','Houston,UK','Houston,Canada']); //three results to appear
+  
 
    const handleLocation = (loc) => {
-      console.log('location:', loc);
+      toggleSearch(false);
+      setLocation([]);
+      fetchWeatherForecast({
+        cityName: loc.name,
+        days: '7'
+      }).then(data=>{
+        setWeather(data);
+        storeData('city',loc.name);
+      })
+    
    }
+   
+   const handleSearch=search=> {
+      //fetch locations
+      if (search.length>2) {
+      fetchLocations({cityName:search}).then(data=>{
+         console.log('got loc:', data);
+         setLocation[data];
+      })
+   }
+   }
+   const handleTextDebounce = useCallback(debounce(handleSearch,1200),[])
+
 
    return (
     <View classname = "flex-1 re" >
@@ -33,7 +57,8 @@ export default function HomeScreen() {
               top: 125}}>
                {
                   showSearch? (
-                  <TextInput placeholder="Enter city here" style={{paddingLeft: 24, height: 40, flex: 1, fontSize: 16,}}
+                  <TextInput onChangeText={handleTextDebounce}
+                   placeholder="Enter city here" style={{paddingLeft: 24, height: 40, flex: 1, fontSize: 16,}}
                   placeholderTextColor={'white'} place
                   classname="searchbar"/>
                   ):null
@@ -59,7 +84,7 @@ export default function HomeScreen() {
                               style={{flex: 1, justifyContent: 'center', alignItems: 'center',flexDirection: 'row', padding:12,
                               paddingHorizontal: 16, marginBottom: 4, borderBottomColor: "black", borderBottomWidth:2, width:"100%"}}>
                                  <MapPinIcon size='20' color= "teal"></MapPinIcon>
-                                 <Text>Houston, Texas</Text>
+                                 <Text> {locations[index]}</Text>
                               </TouchableOpacity>
                            )
                         })
@@ -72,18 +97,22 @@ export default function HomeScreen() {
          <View style={{flex: 1,marginHorizontal: 16, marginBottom: 3, flex: 1,
             flexDirection: 'row', justifyContent: 'space-around', top:-100, height:-1000, width:-100000 }}>
          <ScrollView
-                  vertical
+                  onScrollToTop={90}
+                  flex={1}
+                  vertical= {100}
+                  height={1000}
+                  width={100000}
                   contentContainerStyle={{paddingVertical:100}}
                   showsHorizontalScrollIndicator={false}
                >
               
                <View style={{flex: 1,marginHorizontal: 16, marginBottom: 2, flexDirection: 'row', justifyContent: 'space-around'}}>
                   {/*location*/}
-                  <Text style={{color: 'black', textAlign: 'center', fontSize: 18, top:-100, left:110,
+                  <Text style={{color: 'black', textAlign: 'center', fontSize: 14, top:-100, left:110,
                    fontWeight: 'bold', flex: 1, justifyContent: 'center', alignItems: 'center'}}
-                  > Houston,
+                  > Houston, Texas
                      <Text style={{fontSize: 13, fontWeight: '60',color: '#808080', flex: 1,
-                     justifyContent: 'center', alignItems: 'center', top:-175, left:0}}> Texas
+                     justifyContent: 'center', alignItems: 'center', top:-175, left:0}}>
                      </Text>
                   </Text>
                   
