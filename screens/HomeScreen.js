@@ -42,7 +42,7 @@ export default function HomeScreen() {
                onPress={() => toggleSearch(!showSearch)}
                style = {{backgroundColor: theme.bgPink(0.5), padding: 3, margin: 1, borderRadius: 50}}
                classname = "rounded-full p-3 m-1">
-                  <MagnifyingGlassIcon size = "25" color="black"> </MagnifyingGlassIcon>
+                  <MagnifyingGlassIcon size = "29" color="black"> </MagnifyingGlassIcon>
                </TouchableOpacity>
             </View>
             {
@@ -68,8 +68,10 @@ export default function HomeScreen() {
                ):null
             }
              {/*forecast section*/}
-            <View style={{flex: 1,marginHorizontal: 16, marginBottom: 3, flex: 1,flexDirection: 'row', justifyContent: 'space-around', }}>
-               <ScrollView
+         </View>
+         <View style={{flex: 1,marginHorizontal: 16, marginBottom: 3, flex: 1,
+            flexDirection: 'row', justifyContent: 'space-around', top:-100, height:-1000, width:-100000 }}>
+         <ScrollView
                   vertical
                   contentContainerStyle={{paddingVertical:100}}
                   showsHorizontalScrollIndicator={false}
@@ -77,35 +79,34 @@ export default function HomeScreen() {
               
                <View style={{flex: 1,marginHorizontal: 16, marginBottom: 2, flexDirection: 'row', justifyContent: 'space-around'}}>
                   {/*location*/}
-                  <Text style={{color: 'black', textAlign: 'center', fontSize: 18, top:100, left:110,
+                  <Text style={{color: 'black', textAlign: 'center', fontSize: 18, top:-100, left:110,
                    fontWeight: 'bold', flex: 1, justifyContent: 'center', alignItems: 'center'}}
                   > Houston,
                      <Text style={{fontSize: 13, fontWeight: '60',color: '#808080', flex: 1,
-                     justifyContent: 'center', alignItems: 'center', top:175, left:0}}> Texas
+                     justifyContent: 'center', alignItems: 'center', top:-175, left:0}}> Texas
                      </Text>
                   </Text>
                   
                   {/*weather image*/}
                   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flex: 1,}}>
                      <Image source={require('../assets/images/partlycloudy.png')}
-                      style={{ width:"100%", height:"170%", top:135, left:0, right:0, size:"90%", width: 50, height:50}}>
+                      style={{ width:"100%", height:"170%", top:-100, left:0, right:0, size:"90%", width: 50, height:50}}>
                      </Image>
                   </View>
                   <View style ={{ flex: 1, justifyContent: 'space-between', marginVertical: 2,}}>
                      {/* degree celcius*/}
                      <Text style = {{flex: 1, justifyContent: 'center', alignItems: 'center', textAlign: 'center', 
-                     fontWeight: 'bold', color: 'black', fontSize: 18, marginLeft: 20, top:195, left:-112, right:60 }}>
+                     fontWeight: 'bold', color: 'black', fontSize: 18, marginLeft: 20, top:-10, left:-112, right:60 }}>
                         23&#176;
                      </Text>
                      <Text style = {{flex: 1, justifyContent: 'center', alignItems: 'center', textAlign: 'center', 
-                     fontWeight: 'bold', color: 'black', fontSize: 20, marginLeft: 20, top:200, left:-145, right:60, width:160}}>
+                     fontWeight: 'bold', color: 'black', fontSize: 20, marginLeft: 20, top:-0, left:-145, right:60, width:160}}>
                         Partly Cloudy
                      </Text>
                   </View>
                </View>
                </ScrollView>
             </View>
-         </View>
       </SafeAreaView>
     </ImageBackground>
    </View>
